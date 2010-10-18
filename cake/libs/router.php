@@ -179,6 +179,17 @@ class Router {
 	}
 
 /**
+ * Update the base path in the Router instance to contain the current region name.
+ * 
+ * @return void
+ * @access public
+ */
+	function updatePaths($url) {
+		$_this =& Router::getInstance();
+		$_this->__paths[0]['base'] = sprintf('/%s', $url);
+	}
+
+/**
  * Gets a reference to the Router object instance
  *
  * @return Router Instance of the Router.
