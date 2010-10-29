@@ -197,6 +197,19 @@ class ShellDispatcher {
 				$this->_stop();
 			}
 		}
+		
+		// Make sure we load our custom configuration in here
+		if(isset($this->params['site'])) {
+			set_include_path(get_include_path() . PATH_SEPARATOR . '/usr/local/www/mockingbird');
+			if(!Configure::load('sites/'.$this->params['site'])) {
+				die("Error loading configuration file.\n");
+			};
+			Configure::write('debug', 2);
+			$_SERVER['REQUEST_URI'] = 'batch';
+		} else {
+			$this->stderr("Error: no configuration file selected. Try: cake [console] -site sitename\n");
+			$this->_stop();
+		}
 
 		$this->shiftArgs();
 	}
@@ -582,6 +595,7 @@ class ShellDispatcher {
 		$this->stdout(" -working: " . rtrim($this->params['working'], DS));
 		$this->stdout(" -root: " . rtrim($this->params['root'], DS));
 		$this->stdout(" -core: " . rtrim(CORE_PATH, DS));
+		$this->stdout(" -site: " . $this->params['site']);
 		$this->stdout("");
 		$this->stdout("Changing Paths:");
 		$this->stdout("your working path should be the same as your application path");
