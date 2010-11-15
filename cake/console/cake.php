@@ -161,6 +161,10 @@ class ShellDispatcher {
 			define('DISABLE_DEFAULT_ERROR_HANDLING', false);
 			define('CAKEPHP_SHELL', true);
 		}
+		
+		if(!defined('SITENAME')) {
+			define('SITENAME', 'batch');
+		}
 		require_once(CORE_PATH . 'cake' . DS . 'basics.php');
 	}
 
