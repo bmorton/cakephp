@@ -406,7 +406,7 @@ class Shell extends Object {
  */
 	function hr($newlines = 0) {
 		$this->out(null, $newlines);
-		$this->out('---------------------------------------------------------------');
+		$this->out('------------------------------------------------------------');
 		$this->out(null, $newlines);
 	}
 
