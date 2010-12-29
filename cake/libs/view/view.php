@@ -528,7 +528,7 @@ class View extends Object {
 		ob_start();
 		include ($filename);
 
-		if (Configure::read() > 0 && $this->layout != 'xml') {
+		if (Configure::read() > 0 && (in_array($this->layout, array('xml', 'json', 'js', 'css')) === false)) {
 			echo "<!-- Cached Render Time: " . round(getMicrotime() - $timeStart, 4) . "s -->";
 		}
 		$out = ob_get_clean();
