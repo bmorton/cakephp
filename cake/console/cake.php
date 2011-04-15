@@ -205,7 +205,7 @@ class ShellDispatcher {
 		// Make sure we load our custom configuration in here
 		if(isset($this->params['site'])) {
 			set_include_path(get_include_path() . PATH_SEPARATOR . APP_DIR);
-			if(!Configure::load('sites/'.$this->params['site'])) {
+			if(!Configure::load('config/sites/'.$this->params['site'])) {
 				$this->stderr("Error: Could not load configuration file.\n");
 				$this->_stop(1);
 			};
