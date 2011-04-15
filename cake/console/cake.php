@@ -204,15 +204,16 @@ class ShellDispatcher {
 		
 		// Make sure we load our custom configuration in here
 		if(isset($this->params['site'])) {
-			set_include_path(get_include_path() . PATH_SEPARATOR . '/usr/local/www/mockingbird');
+			set_include_path(get_include_path() . PATH_SEPARATOR . APP_DIR);
 			if(!Configure::load('sites/'.$this->params['site'])) {
-				die("Error loading configuration file.\n");
+				$this->stderr("Error: Could not load configuration file.\n");
+				$this->_stop(1);
 			};
 			Configure::write('debug', 2);
 			$_SERVER['REQUEST_URI'] = 'batch';
 		} else {
 			$this->stderr("Error: no configuration file selected. Try: cake [console] -site sitename\n");
-			$this->_stop();
+			$this->_stop(1);
 		}
 
 		$this->shiftArgs();
